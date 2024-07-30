@@ -21,7 +21,7 @@ const router = createRouter({
     {
       path: '/transactions',
       name: 'Transactions',
-      component: () => import('@/views/TransactionView.vue')
+      component: () => import('@/views/TransactionsView.vue')
     }
   ]
 })
