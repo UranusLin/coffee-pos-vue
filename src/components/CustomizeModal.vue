@@ -5,10 +5,10 @@ const props = defineProps(['item'])
 const emit = defineEmits(['add', 'close'])
 
 const customization = ref({
-  size: props.item.sizes[0],
-  temperature: props.item.temperatures[0],
+  size: props.item.sizes[1],
+  temperature: props.item.temperatures[1],
   sugarLevel: props.item.sugarLevels[0],
-  iceLevel: props.item.iceLevels[0]
+  iceLevel: props.item.iceLevels[1]
 })
 
 function addToOrder() {
@@ -26,7 +26,7 @@ function updateCustomization(type, value) {
 </script>
 
 <template>
-  <div class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" id="my-modal">
+  <div class="fixed inset-0 bg-gray-600 bg-opacity-30 overflow-y-auto h-full w-full" id="my-modal">
     <div class="relative top-20 mx-auto p-5 border w-full max-w-md shadow-lg rounded-md bg-white">
       <h3 class="text-lg font-bold mb-4">Customize {{ item.name }}</h3>
 

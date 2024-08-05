@@ -62,6 +62,7 @@ const orderTotal = computed(() => {
 
 function openCustomizeModal(item) {
   selectedItem.value = item
+  console.log('origin order: ', item)
   showCustomizeModal.value = true
 }
 
@@ -70,6 +71,7 @@ function closeCustomizeModal() {
 }
 
 function addToOrder(item) {
+  console.log('after order: ', item)
   currentOrder.value.push(item)
 }
 
