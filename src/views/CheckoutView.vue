@@ -4,10 +4,12 @@ import { useCheckoutStore } from '@/stores/checkout'
 import { useTransactionsStore } from '@/stores/transactions'
 import { useInventoryStore } from '@/stores/inventory'
 import CustomizeModal from '@/components/CustomizeModal.vue'
+import { useToast } from '@/components/ui/toast/use-toast'
 
 const checkoutStore = useCheckoutStore()
 const transactionsStore = useTransactionsStore()
 const inventoryStore = useInventoryStore()
+const { toast } = useToast()
 
 const menuItems = ref([
   {
@@ -73,6 +75,7 @@ function closeCustomizeModal() {
 function addToOrder(item) {
   console.log('after order: ', item)
   currentOrder.value.push(item)
+  toast({ title: 'Order update', description: `${item.name} add to Oder` })
 }
 
 function removeFromOrder(index) {
@@ -107,7 +110,12 @@ function completeOrder() {
   checkoutStore.completeOrder(transaction)
   transactionsStore.addTransaction(transaction)
   currentOrder.value = []
-  alert('Order completed!')
+  // alert('Order completed!')
+  toast({
+    title: 'Order status update.',
+    description: 'Order completed!',
+    variant: 'destructive'
+  })
 }
 </script>
 
