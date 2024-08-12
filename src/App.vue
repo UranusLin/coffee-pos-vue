@@ -1,7 +1,5 @@
 <script setup>
 import Toaster from '@/components/ui/toast/Toaster.vue'
-
-const nav_table = [{ link: '', name: '' }]
 </script>
 
 <template>
