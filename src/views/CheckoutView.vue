@@ -90,6 +90,10 @@ function calculateItemPrice(item) {
 }
 
 function completeOrder() {
+  if (currentOrder.value.length === 0) {
+    alert('empty order list')
+    return
+  }
   for (const item of currentOrder.value) {
     if (!inventoryStore.checkStock(item.code)) {
       alert(`Not enough ingredients for ${item.name}. Please restock.`)
@@ -159,7 +163,11 @@ function completeOrder() {
           <p class="text-xl font-semibold">Total: ${{ orderTotal }}</p>
           <button
             @click="completeOrder"
-            class="mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            :class="[
+              'mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded',
+              currentOrder.length > 0 ? '' : 'cursor-not-allowed opacity-50'
+            ]"
+            :disabled="currentOrder.length === 0"
           >
             Complete Order
           </button>
