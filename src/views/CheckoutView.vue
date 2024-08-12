@@ -103,7 +103,10 @@ function completeOrder() {
   const transaction = {
     // TODO: this will be issue when multi user create
     id: Date.now(),
-    items: currentOrder.value,
+    items: currentOrder.value.map((item) => ({
+      ...item,
+      price: calculateItemPrice(item)
+    })),
     total: orderTotal.value,
     date: new Date().toISOString()
   }
