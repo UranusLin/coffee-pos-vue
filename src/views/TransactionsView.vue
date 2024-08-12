@@ -9,20 +9,18 @@ const dateFilter = ref('')
 const transactions = computed(() => transactionsStore.getTransactions())
 
 const filteredTransactions = computed(() => {
-  if (!dateFilter.value) {
-    return transactions.value
-  }
-  const filterDate = new Date(dateFilter.value)
-  return transactions.value.filter((transaction) => {
-    const transactionDate = new Date(transaction.date)
-    return transactionDate.toDateString() === filterDate.toDateString()
-  })
-})
+  let result = transactions.value
 
-function filterTransactions() {
-  // This function can be used to trigger any additional actions when the filter changes
-  console.log('Filtering transactions for date:', dateFilter.value)
-}
+  if (dateFilter.value) {
+    const filterDate = new Date(dateFilter.value)
+    result = result.filter((transaction) => {
+      const transactionDate = new Date(transaction.date)
+      return transactionDate.toDateString() === filterDate.toDateString()
+    })
+  }
+
+  return result.sort((a, b) => new Date(b.date) - new Date(a.date))
+})
 </script>
 
 <template>
@@ -36,7 +34,6 @@ function filterTransactions() {
         type="date"
         id="dateFilter"
         v-model="dateFilter"
-        @change="filterTransactions"
         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
       />
     </div>
