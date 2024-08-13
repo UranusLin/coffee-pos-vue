@@ -4,6 +4,8 @@ import { useCheckoutStore } from '@/stores/checkout'
 import { useTransactionsStore } from '@/stores/transactions'
 import { useInventoryStore } from '@/stores/inventory'
 import CustomizeModal from '@/components/CustomizeModal.vue'
+import PaymentModal from '@/components/PaymentModal.vue'
+import PaymentMethodModal from '@/components/PaymentMethodModal.vue'
 import { useToast } from '@/components/ui/toast/use-toast'
 
 const checkoutStore = useCheckoutStore()
@@ -86,6 +88,8 @@ const menuItems = ref([
 
 const currentOrder = ref([])
 const showCustomizeModal = ref(false)
+const showPaymentMethodModal = ref(false)
+const showPaymentModal = ref(false)
 const selectedItem = ref(null)
 
 const orderTotal = computed(() => {
@@ -141,26 +145,16 @@ function completeOrder() {
     return
   }
 
-  inventoryStore.consumeTotalIngredients(currentOrder.value)
-  const transaction = {
-    // TODO: this will be issue when multi user create
-    id: Date.now(),
-    items: currentOrder.value.map((item) => ({
-      ...item,
-      price: calculateItemPrice(item)
-    })),
-    total: orderTotal.value,
-    date: new Date().toISOString()
+  showPaymentMethodModal.value = true
+}
+
+function selectPaymentMethod(method) {
+  showPaymentMethodModal.value = false
+  if (method === 'cash') {
+    showPaymentModal.value = true
+  } else {
+    finalizePayment({ paymentMethod: method, amountPaid: orderTotal.value, change: 0 })
   }
-  checkoutStore.completeOrder(transaction)
-  transactionsStore.addTransaction(transaction)
-  currentOrder.value = []
-  // alert('Order completed!')
-  toast({
-    title: 'Order status update.',
-    description: 'Order completed!',
-    variant: 'destructive'
-  })
 }
 
 const filteredMenuItems = computed(() => {
@@ -169,6 +163,31 @@ const filteredMenuItems = computed(() => {
 
 function cahngeCategory(category) {
   currentCategory.value = category
+}
+
+function finalizePayment(paymentDetails) {
+  inventoryStore.consumeTotalIngredients(currentOrder.value)
+  const transaction = {
+    id: Date.now(),
+    items: currentOrder.value.map((item) => ({
+      ...item,
+      price: calculateItemPrice(item)
+    })),
+    total: orderTotal.value,
+    paymentMethod: paymentDetails.paymentMethod,
+    amountPaid: paymentDetails.amountPaid,
+    change: paymentDetails.change,
+    date: new Date().toISOString()
+  }
+  checkoutStore.completeOrder(transaction)
+  transactionsStore.addTransaction(transaction)
+  currentOrder.value = []
+  showPaymentModal.value = false
+  toast({
+    title: 'Order status update.',
+    description: 'Order completed!',
+    variant: 'destructive'
+  })
 }
 </script>
 
@@ -246,6 +265,18 @@ function cahngeCategory(category) {
       :item="selectedItem"
       @add="addToOrder"
       @close="closeCustomizeModal"
+    />
+    <PaymentMethodModal
+      v-if="showPaymentMethodModal"
+      :total="orderTotal"
+      @selectMethod="selectPaymentMethod"
+      @close="showPaymentMethodModal = false"
+    />
+    <PaymentModal
+      v-if="showPaymentModal"
+      :total="orderTotal"
+      @confirm="finalizePayment"
+      @close="showPaymentModal = false"
     />
   </div>
 </template>
