@@ -4,7 +4,7 @@ export const useInventoryStore = defineStore('inventory', {
   state: () => ({
     ingredients: {
       milk: { name: 'Milk', unit: 'ml', amount: 10000 },
-      coffee: { name: 'Coffee', unit: 'g', amount: 5000 },
+      coffee: { name: 'Coffee', unit: 'g', amount: 1000 },
       sugar: { name: 'Sugar', unit: 'g', amount: 3000 }
     },
     recipes: {
@@ -55,6 +55,36 @@ export const useInventoryStore = defineStore('inventory', {
     },
     addOrUpdateRecipe(code, recipe) {
       this.recipes[code] = recipe
+    },
+    checkTotalStock(orderItems) {
+      const totalNeeded = {}
+
+      // 計算訂單所需的總原料量
+      for (const item of orderItems) {
+        const recipe = this.recipes[item.code]
+        if (!recipe) {
+          console.warn(`Recipe not found: ${item.code}`)
+          continue
+        }
+        for (const [ingredient, amount] of Object.entries(recipe.ingredients)) {
+          totalNeeded[ingredient] = (totalNeeded[ingredient] || 0) + amount
+        }
+      }
+
+      // 檢查是否有足夠的庫存
+      for (const [ingredient, amount] of Object.entries(totalNeeded)) {
+        if (!this.ingredients[ingredient] || this.ingredients[ingredient].amount < amount) {
+          return { success: false, ingredient: ingredient }
+        }
+      }
+
+      return { success: true }
+    },
+
+    consumeTotalIngredients(orderItems) {
+      for (const item of orderItems) {
+        this.consumeIngredients(item.code)
+      }
     }
   },
   getters: {

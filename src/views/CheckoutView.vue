@@ -10,6 +10,7 @@ const checkoutStore = useCheckoutStore()
 const transactionsStore = useTransactionsStore()
 const inventoryStore = useInventoryStore()
 const { toast } = useToast()
+const errorMsg = ref('')
 
 const menuItems = ref([
   {
@@ -79,6 +80,7 @@ function addToOrder(item) {
 }
 
 function removeFromOrder(index) {
+  errorMsg.value = ''
   currentOrder.value.splice(index, 1)
 }
 
@@ -91,19 +93,26 @@ function calculateItemPrice(item) {
 
 function completeOrder() {
   if (currentOrder.value.length === 0) {
-    alert('empty order list')
+    toast({
+      title: 'Order Error',
+      description: 'Order list is empty',
+      variant: 'destructive'
+    })
     return
   }
-  for (const item of currentOrder.value) {
-    if (!inventoryStore.checkStock(item.code)) {
-      alert(`Not enough ingredients for ${item.name}. Please restock.`)
-      return
-    }
-  }
-  for (const item of currentOrder.value) {
-    inventoryStore.consumeIngredients(item.code)
+
+  const stockCheck = inventoryStore.checkTotalStock(currentOrder.value)
+  if (!stockCheck.success) {
+    errorMsg.value = `Not enough ${stockCheck.ingredient}. Please restock.`
+    toast({
+      title: 'Inventory Error',
+      description: `Not enough ${stockCheck.ingredient}. Please restock.`,
+      variant: 'destructive'
+    })
+    return
   }
 
+  inventoryStore.consumeTotalIngredients(currentOrder.value)
   const transaction = {
     // TODO: this will be issue when multi user create
     id: Date.now(),
@@ -174,6 +183,7 @@ function completeOrder() {
           >
             Complete Order
           </button>
+          <div class="text-bold text-start text-red-500">{{ errorMsg }}</div>
         </div>
       </div>
     </div>
