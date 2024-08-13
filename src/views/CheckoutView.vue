@@ -91,19 +91,25 @@ function calculateItemPrice(item) {
 
 function completeOrder() {
   if (currentOrder.value.length === 0) {
-    alert('empty order list')
+    toast({
+      title: 'Order Error',
+      description: 'Order list is empty',
+      variant: 'destructive'
+    })
     return
   }
-  for (const item of currentOrder.value) {
-    if (!inventoryStore.checkStock(item.code)) {
-      alert(`Not enough ingredients for ${item.name}. Please restock.`)
-      return
-    }
-  }
-  for (const item of currentOrder.value) {
-    inventoryStore.consumeIngredients(item.code)
+
+  const stockCheck = inventoryStore.checkTotalStock(currentOrder.value)
+  if (!stockCheck.success) {
+    toast({
+      title: 'Inventory Error',
+      description: `Not enough ${stockCheck.ingredient}. Please restock.`,
+      variant: 'destructive'
+    })
+    return
   }
 
+  inventoryStore.consumeTotalIngredients(currentOrder.value)
   const transaction = {
     // TODO: this will be issue when multi user create
     id: Date.now(),
