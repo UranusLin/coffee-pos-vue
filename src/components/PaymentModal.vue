@@ -11,7 +11,9 @@ const change = computed(() => {
 })
 
 function addToAmount(value) {
-  amountPaid.value += value
+  const currentAmount = parseFloat(amountPaid.value) || 0
+  const addedAmount = parseFloat(value) || 0
+  amountPaid.value = (currentAmount + addedAmount).toFixed(2)
 }
 
 function clearAmount() {
