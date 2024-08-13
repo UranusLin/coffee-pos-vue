@@ -10,6 +10,7 @@ const checkoutStore = useCheckoutStore()
 const transactionsStore = useTransactionsStore()
 const inventoryStore = useInventoryStore()
 const { toast } = useToast()
+const errorMsg = ref('')
 
 const menuItems = ref([
   {
@@ -79,6 +80,7 @@ function addToOrder(item) {
 }
 
 function removeFromOrder(index) {
+  errorMsg.value = ''
   currentOrder.value.splice(index, 1)
 }
 
@@ -101,6 +103,7 @@ function completeOrder() {
 
   const stockCheck = inventoryStore.checkTotalStock(currentOrder.value)
   if (!stockCheck.success) {
+    errorMsg.value = `Not enough ${stockCheck.ingredient}. Please restock.`
     toast({
       title: 'Inventory Error',
       description: `Not enough ${stockCheck.ingredient}. Please restock.`,
@@ -180,6 +183,7 @@ function completeOrder() {
           >
             Complete Order
           </button>
+          <div class="text-bold text-start text-red-500">{{ errorMsg }}</div>
         </div>
       </div>
     </div>
