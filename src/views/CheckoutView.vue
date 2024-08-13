@@ -12,6 +12,9 @@ const inventoryStore = useInventoryStore()
 const { toast } = useToast()
 const errorMsg = ref('')
 
+const menuCategories = ref(['coffee', 'non-coffee', 'food'])
+const currentCategory = ref('coffee')
+
 const menuItems = ref([
   {
     id: 1,
@@ -21,7 +24,8 @@ const menuItems = ref([
     sizes: ['小', '中', '大'],
     temperatures: ['熱', '冰'],
     sugarLevels: ['無糖', '微糖', '半糖', '正常'],
-    iceLevels: ['去冰', '微冰', '少冰', '正常冰']
+    iceLevels: ['去冰', '微冰', '少冰', '正常冰'],
+    catrgory: 'coffee'
   },
   {
     id: 2,
@@ -31,7 +35,8 @@ const menuItems = ref([
     sizes: ['小', '中', '大'],
     temperatures: ['熱', '冰'],
     sugarLevels: ['無糖', '微糖', '半糖', '正常'],
-    iceLevels: ['去冰', '微冰', '少冰', '正常冰']
+    iceLevels: ['去冰', '微冰', '少冰', '正常冰'],
+    catrgory: 'coffee'
   },
   {
     id: 3,
@@ -41,7 +46,8 @@ const menuItems = ref([
     sizes: ['小', '中', '大'],
     temperatures: ['熱', '冰'],
     sugarLevels: ['無糖', '微糖', '半糖', '正常'],
-    iceLevels: ['去冰', '微冰', '少冰', '正常冰']
+    iceLevels: ['去冰', '微冰', '少冰', '正常冰'],
+    catrgory: 'coffee'
   },
   {
     id: 4,
@@ -51,7 +57,30 @@ const menuItems = ref([
     sizes: ['小', '中', '大'],
     temperatures: ['熱', '冰'],
     sugarLevels: ['無糖', '微糖', '半糖', '正常'],
-    iceLevels: ['去冰', '微冰', '少冰', '正常冰']
+    iceLevels: ['去冰', '微冰', '少冰', '正常冰'],
+    catrgory: 'coffee'
+  },
+  {
+    id: 5,
+    code: 'black_tea',
+    name: '紅茶(Black Tea)',
+    basePrice: 30,
+    sizes: ['小', '中', '大'],
+    temperatures: ['熱', '冰'],
+    sugarLevels: ['無糖', '微糖', '半糖', '正常'],
+    iceLevels: ['去冰', '微冰', '少冰', '正常冰'],
+    catrgory: 'non-coffee'
+  },
+  {
+    id: 6,
+    code: 'blueberry_bagel',
+    name: '藍莓貝果(Blueberry Bagel)',
+    basePrice: 80,
+    sizes: [],
+    temperatures: ['常溫', '加熱'],
+    sugarLevels: [],
+    iceLevels: [],
+    catrgory: 'food'
   }
 ])
 
@@ -133,6 +162,14 @@ function completeOrder() {
     variant: 'destructive'
   })
 }
+
+const filteredMenuItems = computed(() => {
+  return menuItems.value.filter((item) => item.catrgory === currentCategory.value)
+})
+
+function cahngeCategory(category) {
+  currentCategory.value = category
+}
 </script>
 
 <template>
@@ -140,10 +177,27 @@ function completeOrder() {
     <h1 class="text-2xl font-semibold mb-4">Checkout</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
+        <div class="mb-4">
+          <nav class="flex space-x-4">
+            <button
+              v-for="category in menuCategories"
+              :key="category"
+              @click="cahngeCategory(category)"
+              :class="[
+                'px-3 py-2 rounded-md text-sm font-medium',
+                currentCategory === category
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              ]"
+            >
+              {{ category }}
+            </button>
+          </nav>
+        </div>
         <h2 class="text-xl font-semibold mb-2">Menu Items</h2>
         <div class="grid grid-cols-2 gap-2">
           <button
-            v-for="item in menuItems"
+            v-for="item in filteredMenuItems"
             :key="item.id"
             @click="openCustomizeModal(item)"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
