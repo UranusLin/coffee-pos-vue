@@ -6,14 +6,18 @@ const emit = defineEmits(['confirm', 'close'])
 
 const amountPaid = ref('')
 const change = computed(() => {
-  const paid = parseFloat(amountPaid.value) || 0
-  return Math.max(paid - props.total, 0).toFixed(2)
+  const paid = Number(amountPaid.value) || 0
+  return Math.max(paid - props.total, 0)
 })
 
 function addToAmount(value) {
-  const currentAmount = parseFloat(amountPaid.value) || 0
-  const addedAmount = parseFloat(value) || 0
-  amountPaid.value = (currentAmount + addedAmount).toFixed(2)
+  const currentAmount = Number(amountPaid.value) || 0
+  const addedAmount = Number(value) || 0
+  amountPaid.value = currentAmount + addedAmount
+}
+
+function appendToAmount(value) {
+  amountPaid.value = Number(String(amountPaid.value) + String(value))
 }
 
 function clearAmount() {
@@ -41,11 +45,11 @@ function confirmPayment() {
       <p class="mb-4">付款金額: ${{ amountPaid || '0' }}</p>
       <p class="mb-4">找零: ${{ change }}</p>
       <div class="grid grid-cols-3 gap-2 mb-4">
-        <button v-for="n in 9" :key="n" @click="addToAmount(n)" class="bg-gray-200 p-2 rounded">
+        <button v-for="n in 9" :key="n" @click="appendToAmount(n)" class="bg-gray-200 p-2 rounded">
           {{ n }}
         </button>
-        <button @click="addToAmount('0')" class="bg-gray-200 p-2 rounded">0</button>
-        <button @click="addToAmount('00')" class="bg-gray-200 p-2 rounded">00</button>
+        <button @click="appendToAmount('0')" class="bg-gray-200 p-2 rounded">0</button>
+        <button @click="appendToAmount('00')" class="bg-gray-200 p-2 rounded">00</button>
         <button @click="clearAmount()" class="bg-red-500 text-white p-2 rounded">清除</button>
       </div>
       <div class="grid grid-cols-2 gap-2 mb-4">
