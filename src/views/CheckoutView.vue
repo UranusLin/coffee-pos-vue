@@ -97,6 +97,7 @@ const showCustomizeModal = ref(false)
 const showPaymentMethodModal = ref(false)
 const showPaymentModal = ref(false)
 const selectedItem = ref(null)
+const selectExistingItem = ref(null)
 
 const orderTotal = computed(() => {
   return currentOrder.value.reduce(
@@ -105,9 +106,9 @@ const orderTotal = computed(() => {
   )
 })
 
-function openCustomizeModal(item) {
+function openCustomizeModal(item, existingItem = null) {
   selectedItem.value = item
-  console.log('origin order: ', item)
+  selectExistingItem.value = existingItem
   showCustomizeModal.value = true
 }
 
@@ -116,9 +117,26 @@ function closeCustomizeModal() {
 }
 
 function addToOrder(item) {
+  const existimgItemIndex = currentOrder.value.findIndex(
+    (orderItem) =>
+      orderItem.id === item.id &&
+      orderItem.customization.size === item.customization.size &&
+      orderItem.customization.temperature === item.customization.temperature &&
+      orderItem.customization.sugarLevel === item.customization.sugarLevel &&
+      orderItem.customization.iceLevel === item.customization.iceLevel
+  )
+
+  if (existimgItemIndex !== -1) {
+    if (item.quantity === 0) {
+      currentOrder.value.splice(existimgItemIndex, 1)
+    } else {
+      currentOrder.value[existimgItemIndex] = item
+    }
+  } else {
+    currentOrder.value.push(item)
+  }
+
   console.log('after order: ', item)
-  item.quantity += 1
-  currentOrder.value.push(item)
   toast({ title: 'Order update', description: `${item.name} add to Oder` })
 }
 
@@ -209,19 +227,11 @@ function increaseQuantity(item) {
       orderItem.customization.iceLevel === item.customization.iceLevel
   )
 
-  if (existingItem) {
-    existingItem.quantity += 1
-  } else {
-    openCustomizeModal(item)
-  }
+  openCustomizeModal(item, existingItem)
 }
 
-function decreaseQuantity(index) {
-  if (currentOrder.value[index].quantity > 1) {
-    currentOrder.value[index].quantity -= 1
-  } else {
-    removeFromOrder(index)
-  }
+function decreaseQuantity(item) {
+  item.quantity--
 }
 </script>
 
@@ -275,7 +285,7 @@ function decreaseQuantity(index) {
               x {{ item.quantity }}
             </span>
             <div class="flex items-center">
-              <button @click="decreaseQuantity(index)" class="text-red-500 hover:text-red-700 px-2">
+              <button @click="decreaseQuantity(item)" class="text-red-500 hover:text-red-700 px-2">
                 -
               </button>
               <span class="mx-2">{{ item.quantity }}</span>
@@ -310,6 +320,7 @@ function decreaseQuantity(index) {
     <CustomizeModal
       v-if="showCustomizeModal"
       :item="selectedItem"
+      :existItem="selectExistingItem"
       @add="addToOrder"
       @close="closeCustomizeModal"
     />
