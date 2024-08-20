@@ -1,18 +1,34 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
-const props = defineProps(['item'])
+const props = defineProps(['item', 'existItem'])
 const emit = defineEmits(['add', 'close'])
 
+const quantity = ref(1)
+
 const customization = ref({
-  size: props.item.sizes[1],
-  temperature: props.item.temperatures[1],
-  sugarLevel: props.item.sugarLevels[0],
-  iceLevel: props.item.iceLevels[1]
+  size: '',
+  temperature: '',
+  sugarLevel: '',
+  iceLevel: ''
+})
+
+onMounted(() => {
+  if (props.existItem) {
+    customization.value = { ...props.existItem.customization }
+    quantity.value = props.existItem.quantity
+  } else {
+    customization.value = {
+      size: props.item.sizes[1],
+      temperature: props.item.temperatures[1],
+      sugarLevel: props.item.sugarLevels[0],
+      iceLevel: props.item.iceLevels[1]
+    }
+  }
 })
 
 function addToOrder() {
-  emit('add', { ...props.item, customization: customization.value })
+  emit('add', { ...props.item, customization: customization.value, quantity: quantity.value })
   closeModal()
 }
 
@@ -22,6 +38,14 @@ function closeModal() {
 
 function updateCustomization(type, value) {
   customization.value[type] = value
+}
+
+function incrementQuantity() {
+  quantity.value++
+}
+
+function decrementQuntity() {
+  quantity.value--
 }
 </script>
 
@@ -103,6 +127,15 @@ function updateCustomization(type, value) {
           >
             {{ ice }}
           </button>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="block mb-2">Quantity</label>
+        <div class="flex items-center space-x-2">
+          <button @click="decrementQuntity" class="p-3 py-2 bg-gray-200 rounded">-</button>
+          <span class="px-3 py-2">{{ quantity }}</span>
+          <button @click="incrementQuantity" class="p-3 py-2 bg-gray-200 rounded">+</button>
         </div>
       </div>
 

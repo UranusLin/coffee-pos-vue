@@ -27,7 +27,8 @@ const menuItems = ref([
     temperatures: ['熱', '冰'],
     sugarLevels: ['無糖', '微糖', '半糖', '正常'],
     iceLevels: ['去冰', '微冰', '少冰', '正常冰'],
-    catrgory: 'coffee'
+    catrgory: 'coffee',
+    quantity: 0
   },
   {
     id: 2,
@@ -38,7 +39,8 @@ const menuItems = ref([
     temperatures: ['熱', '冰'],
     sugarLevels: ['無糖', '微糖', '半糖', '正常'],
     iceLevels: ['去冰', '微冰', '少冰', '正常冰'],
-    catrgory: 'coffee'
+    catrgory: 'coffee',
+    quantity: 0
   },
   {
     id: 3,
@@ -49,7 +51,8 @@ const menuItems = ref([
     temperatures: ['熱', '冰'],
     sugarLevels: ['無糖', '微糖', '半糖', '正常'],
     iceLevels: ['去冰', '微冰', '少冰', '正常冰'],
-    catrgory: 'coffee'
+    catrgory: 'coffee',
+    quantity: 0
   },
   {
     id: 4,
@@ -60,7 +63,8 @@ const menuItems = ref([
     temperatures: ['熱', '冰'],
     sugarLevels: ['無糖', '微糖', '半糖', '正常'],
     iceLevels: ['去冰', '微冰', '少冰', '正常冰'],
-    catrgory: 'coffee'
+    catrgory: 'coffee',
+    quantity: 0
   },
   {
     id: 5,
@@ -71,7 +75,8 @@ const menuItems = ref([
     temperatures: ['熱', '冰'],
     sugarLevels: ['無糖', '微糖', '半糖', '正常'],
     iceLevels: ['去冰', '微冰', '少冰', '正常冰'],
-    catrgory: 'non-coffee'
+    catrgory: 'non-coffee',
+    quantity: 0
   },
   {
     id: 6,
@@ -82,7 +87,8 @@ const menuItems = ref([
     temperatures: ['常溫', '加熱'],
     sugarLevels: [],
     iceLevels: [],
-    catrgory: 'food'
+    catrgory: 'food',
+    quantity: 0
   }
 ])
 
@@ -91,14 +97,18 @@ const showCustomizeModal = ref(false)
 const showPaymentMethodModal = ref(false)
 const showPaymentModal = ref(false)
 const selectedItem = ref(null)
+const selectExistingItem = ref(null)
 
 const orderTotal = computed(() => {
-  return currentOrder.value.reduce((total, item) => total + calculateItemPrice(item), 0)
+  return currentOrder.value.reduce(
+    (total, item) => total + calculateItemPrice(item) * item.quantity,
+    0
+  )
 })
 
-function openCustomizeModal(item) {
+function openCustomizeModal(item, existingItem = null) {
   selectedItem.value = item
-  console.log('origin order: ', item)
+  selectExistingItem.value = existingItem
   showCustomizeModal.value = true
 }
 
@@ -107,8 +117,26 @@ function closeCustomizeModal() {
 }
 
 function addToOrder(item) {
+  const existimgItemIndex = currentOrder.value.findIndex(
+    (orderItem) =>
+      orderItem.id === item.id &&
+      orderItem.customization.size === item.customization.size &&
+      orderItem.customization.temperature === item.customization.temperature &&
+      orderItem.customization.sugarLevel === item.customization.sugarLevel &&
+      orderItem.customization.iceLevel === item.customization.iceLevel
+  )
+
+  if (existimgItemIndex !== -1) {
+    if (item.quantity === 0) {
+      currentOrder.value.splice(existimgItemIndex, 1)
+    } else {
+      currentOrder.value[existimgItemIndex] = item
+    }
+  } else {
+    currentOrder.value.push(item)
+  }
+
   console.log('after order: ', item)
-  currentOrder.value.push(item)
   toast({ title: 'Order update', description: `${item.name} add to Oder` })
 }
 
@@ -189,6 +217,22 @@ function finalizePayment(paymentDetails) {
     variant: 'destructive'
   })
 }
+function increaseQuantity(item) {
+  const existingItem = currentOrder.value.find(
+    (orderItem) =>
+      orderItem.id === item.id &&
+      orderItem.customization.size === item.customization.size &&
+      orderItem.customization.temperature === item.customization.temperature &&
+      orderItem.customization.sugarLevel === item.customization.sugarLevel &&
+      orderItem.customization.iceLevel === item.customization.iceLevel
+  )
+
+  openCustomizeModal(item, existingItem)
+}
+
+function decreaseQuantity(item) {
+  item.quantity--
+}
 </script>
 
 <template>
@@ -238,10 +282,23 @@ function finalizePayment(paymentDetails) {
               {{ item.customization.sugarLevel }}, {{ item.customization.iceLevel }}) - ${{
                 calculateItemPrice(item)
               }}
+              x {{ item.quantity }}
             </span>
-            <button @click="removeFromOrder(index)" class="text-red-500 hover:text-red-700">
-              Remove
-            </button>
+            <div class="flex items-center">
+              <button @click="decreaseQuantity(item)" class="text-red-500 hover:text-red-700 px-2">
+                -
+              </button>
+              <span class="mx-2">{{ item.quantity }}</span>
+              <button
+                @click="increaseQuantity(item)"
+                class="text-green-500 hover:text-green-700 px-2"
+              >
+                +
+              </button>
+              <button @click="removeFromOrder(index)" class="text-red-500 hover:text-red-700 ml-2">
+                Remove
+              </button>
+            </div>
           </li>
         </ul>
         <div class="mt-4">
@@ -263,6 +320,7 @@ function finalizePayment(paymentDetails) {
     <CustomizeModal
       v-if="showCustomizeModal"
       :item="selectedItem"
+      :existItem="selectExistingItem"
       @add="addToOrder"
       @close="closeCustomizeModal"
     />

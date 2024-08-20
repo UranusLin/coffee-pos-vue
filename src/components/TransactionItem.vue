@@ -41,6 +41,7 @@ const showCashDetails = computed(() => props.transaction.paymentMethod === 'cash
         {{ item.name }} ({{ item.customization.size }}, {{ item.customization.temperature }}) - ${{
           item.price.toFixed(2)
         }}
+        x {{ item.quantity }} = {{ item.quantity * item.price }}
       </li>
     </ul>
     <div class="mt-4 flex justify-between items-end">
