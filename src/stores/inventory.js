@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import api from '@/services/api'
 
 export const useInventoryStore = defineStore('inventory', {
   state: () => ({
@@ -24,7 +25,8 @@ export const useInventoryStore = defineStore('inventory', {
         name: 'Cappuccino',
         ingredients: { milk: 150, coffee: 40 }
       }
-    }
+    },
+    menuItems: []
   }),
   actions: {
     updateStock(ingredient, amount) {
@@ -84,6 +86,14 @@ export const useInventoryStore = defineStore('inventory', {
     consumeTotalIngredients(orderItems) {
       for (const item of orderItems) {
         this.consumeIngredients(item.code)
+      }
+    },
+    async fetchMenu() {
+      try {
+        const response = await api.getMenu()
+        this.menuItems = response.data
+      } catch (error) {
+        console.error('Error fetching menu:', error)
       }
     }
   },

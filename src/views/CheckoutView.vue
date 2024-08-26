@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useCheckoutStore } from '@/stores/checkout'
 import { useTransactionsStore } from '@/stores/transactions'
 import { useInventoryStore } from '@/stores/inventory'
@@ -17,80 +17,9 @@ const errorMsg = ref('')
 const menuCategories = ref(['coffee', 'non-coffee', 'food'])
 const currentCategory = ref('coffee')
 
-const menuItems = ref([
-  {
-    id: 1,
-    code: 'espresso',
-    name: '濃縮咖啡(Espresso)',
-    basePrice: 80,
-    sizes: ['小', '中', '大'],
-    temperatures: ['熱', '冰'],
-    sugarLevels: ['無糖', '微糖', '半糖', '正常'],
-    iceLevels: ['去冰', '微冰', '少冰', '正常冰'],
-    catrgory: 'coffee',
-    quantity: 0
-  },
-  {
-    id: 2,
-    code: 'americano',
-    name: '美式咖啡(Americano)',
-    basePrice: 100,
-    sizes: ['小', '中', '大'],
-    temperatures: ['熱', '冰'],
-    sugarLevels: ['無糖', '微糖', '半糖', '正常'],
-    iceLevels: ['去冰', '微冰', '少冰', '正常冰'],
-    catrgory: 'coffee',
-    quantity: 0
-  },
-  {
-    id: 3,
-    code: 'latte',
-    name: '拿鐵(Latte)',
-    basePrice: 120,
-    sizes: ['小', '中', '大'],
-    temperatures: ['熱', '冰'],
-    sugarLevels: ['無糖', '微糖', '半糖', '正常'],
-    iceLevels: ['去冰', '微冰', '少冰', '正常冰'],
-    catrgory: 'coffee',
-    quantity: 0
-  },
-  {
-    id: 4,
-    code: 'cappuccino',
-    name: '卡布奇諾(Cappuccino)',
-    basePrice: 130,
-    sizes: ['小', '中', '大'],
-    temperatures: ['熱', '冰'],
-    sugarLevels: ['無糖', '微糖', '半糖', '正常'],
-    iceLevels: ['去冰', '微冰', '少冰', '正常冰'],
-    catrgory: 'coffee',
-    quantity: 0
-  },
-  {
-    id: 5,
-    code: 'black_tea',
-    name: '紅茶(Black Tea)',
-    basePrice: 30,
-    sizes: ['小', '中', '大'],
-    temperatures: ['熱', '冰'],
-    sugarLevels: ['無糖', '微糖', '半糖', '正常'],
-    iceLevels: ['去冰', '微冰', '少冰', '正常冰'],
-    catrgory: 'non-coffee',
-    quantity: 0
-  },
-  {
-    id: 6,
-    code: 'blueberry_bagel',
-    name: '藍莓貝果(Blueberry Bagel)',
-    basePrice: 80,
-    sizes: [],
-    temperatures: ['常溫', '加熱'],
-    sugarLevels: [],
-    iceLevels: [],
-    catrgory: 'food',
-    quantity: 0
-  }
-])
+onMounted(() => {
+  inventoryStore.fetchMenu()
+})
 
 const currentOrder = ref([])
 const showCustomizeModal = ref(false)
@@ -186,7 +115,7 @@ function selectPaymentMethod(method) {
 }
 
 const filteredMenuItems = computed(() => {
-  return menuItems.value.filter((item) => item.catrgory === currentCategory.value)
+  return inventoryStore.menuItems.filter((item) => item.catrgory === currentCategory.value)
 })
 
 function cahngeCategory(category) {
