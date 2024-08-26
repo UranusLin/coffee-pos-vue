@@ -11,5 +11,11 @@ const apiClient = axios.create({
 export default {
   getMenu() {
     return apiClient.get('/menu')
+  },
+  addTransaction(transaction) {
+    return apiClient.post('/transactions', transaction)
+  },
+  getTransactions() {
+    return apiClient.get('/transactions')
   }
 }

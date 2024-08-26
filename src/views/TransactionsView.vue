@@ -1,11 +1,15 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useTransactionsStore } from '@/stores/transactions'
 import TransactionList from '@/components/TransactionList.vue'
 
 const transactionsStore = useTransactionsStore()
 const filterType = ref('day')
 const filterDate = ref(new Date().toISOString().split('T')[0])
+
+onMounted(() => {
+  transactionsStore.fetchTransactions()
+})
 
 const transactions = computed(() => transactionsStore.getTransactions())
 
