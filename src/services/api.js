@@ -21,8 +21,11 @@ export default {
   getIngredients() {
     return apiClient.get('/ingredients')
   },
-  updateIngredient(ingredient, data) {
-    return apiClient.patch(`/ingredients/${ingredient}`, data)
+  getIngredient(id) {
+    return apiClient.get(`/ingredients/${id}`)
+  },
+  updateIngredient(id, data) {
+    return apiClient.patch(`/ingredients/${id}`, data)
   },
   getRecipes() {
     return apiClient.get('/recipes')

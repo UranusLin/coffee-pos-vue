@@ -11,9 +11,13 @@ export const useInventoryStore = defineStore('inventory', {
     async updateStock(ingredient, amount) {
       try {
         ingredient = ingredient.toLowerCase()
-        const currenAmount = this.ingredients[ingredient].amount
-        const response = await api.updateIngredient(ingredient, { amount: currenAmount + amount })
-        this.ingredients[ingredient] = response.data
+        const ingredientObj = this.ingredients.find((ingred) => ingred.id === ingredient)
+        if (!ingredientObj) throw new Error(`Ingredient not found: ${ingredient}`)
+        const response = await api.updateIngredient(ingredient, {
+          amount: Number(ingredientObj.amount) + Number(amount)
+        })
+        const index = this.ingredients.findIndex((i) => i.id === ingredient)
+        this.ingredients[index] = response.data
       } catch (error) {
         console.error('Error updating stock:', error)
       }
