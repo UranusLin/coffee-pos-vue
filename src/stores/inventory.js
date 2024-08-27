@@ -1,53 +1,50 @@
 import { defineStore } from 'pinia'
+import api from '@/services/api'
 
 export const useInventoryStore = defineStore('inventory', {
   state: () => ({
-    ingredients: {
-      milk: { name: 'Milk', unit: 'ml', amount: 10000 },
-      coffee: { name: 'Coffee', unit: 'g', amount: 1000 },
-      sugar: { name: 'Sugar', unit: 'g', amount: 3000 }
-    },
-    recipes: {
-      espresso: {
-        name: 'Espresso',
-        ingredients: { coffee: 40 }
-      },
-      americano: {
-        name: 'Americano',
-        ingredients: { coffee: 40 }
-      },
-      latte: {
-        name: 'Latte',
-        ingredients: { milk: 200, coffee: 40 }
-      },
-      cappuccino: {
-        name: 'Cappuccino',
-        ingredients: { milk: 150, coffee: 40 }
-      }
-    }
+    ingredients: [],
+    recipes: [],
+    menuItems: []
   }),
   actions: {
-    updateStock(ingredient, amount) {
-      this.ingredients[ingredient.toLowerCase()].amount += amount
+    async updateStock(ingredient, amount) {
+      try {
+        ingredient = ingredient.toLowerCase()
+        const ingredientObj = this.ingredients.find((ingred) => ingred.id === ingredient)
+        if (!ingredientObj) throw new Error(`Ingredient not found: ${ingredient}`)
+        const response = await api.updateIngredient(ingredient, {
+          amount: Number(ingredientObj.amount) + Number(amount)
+        })
+        const index = this.ingredients.findIndex((i) => i.id === ingredient)
+        this.ingredients[index] = response.data
+      } catch (error) {
+        console.error('Error updating stock:', error)
+      }
     },
-    consumeIngredients(recipe) {
-      if (!this.recipes[recipe]) {
+    async consumeIngredients(recipeId) {
+      const recipe = this.recipes.find((r) => r.id === recipeId)
+      if (!recipe) {
         console.warn(`Recipe not found: ${recipe}`)
         return
       }
-      for (const [ingredient, amount] of Object.entries(this.recipes[recipe].ingredients)) {
-        if (this.ingredients[ingredient]) {
-          this.ingredients[ingredient].amount -= amount
+      for (const [ingredient, amount] of Object.entries(recipe.ingredients)) {
+        const ingredientObj = this.ingredients.find((i) => i.id === ingredient)
+        if (ingredientObj) {
+          ingredientObj.amount -= amount
+          await api.updateIngredient(ingredientObj.id, { amount: ingredientObj.amount })
         }
       }
     },
-    checkStock(recipe) {
-      if (!this.recipes[recipe]) {
+    checkStock(recipeId) {
+      const recipe = this.recipes.find((r) => r.id === recipeId)
+      if (!recipe) {
         console.warn(`Recipe not found: ${recipe}`)
         return true
       }
-      for (const [ingredient, amount] of Object.entries(this.recipes[recipe].ingredients)) {
-        if (!this.ingredients[ingredient] || this.ingredients[ingredient].amount < amount) {
+      for (const [ingredient, amount] of Object.entries(recipe.ingredients)) {
+        const ingredientObj = this.ingredients.find((i) => i.id === ingredient)
+        if (!ingredientObj || ingredientObj.amount < amount) {
           return false
         }
       }
@@ -61,7 +58,7 @@ export const useInventoryStore = defineStore('inventory', {
 
       // 計算訂單所需的總原料量
       for (const item of orderItems) {
-        const recipe = this.recipes[item.code]
+        const recipe = this.recipes.find((r) => r.id === item.code)
         if (!recipe) {
           console.warn(`Recipe not found: ${item.code}`)
           continue
@@ -73,7 +70,8 @@ export const useInventoryStore = defineStore('inventory', {
 
       // 檢查是否有足夠的庫存
       for (const [ingredient, amount] of Object.entries(totalNeeded)) {
-        if (!this.ingredients[ingredient] || this.ingredients[ingredient].amount < amount) {
+        const ingredientObj = this.ingredients.find((i) => i.id === ingredient)
+        if (!ingredientObj || ingredientObj.amount < amount) {
           return { success: false, ingredient: ingredient }
         }
       }
@@ -84,6 +82,30 @@ export const useInventoryStore = defineStore('inventory', {
     consumeTotalIngredients(orderItems) {
       for (const item of orderItems) {
         this.consumeIngredients(item.code)
+      }
+    },
+    async fetchMenu() {
+      try {
+        const response = await api.getMenu()
+        this.menuItems = response.data
+      } catch (error) {
+        console.error('Error fetching menu:', error)
+      }
+    },
+    async fetchIngredients() {
+      try {
+        const response = await api.getIngredients()
+        this.ingredients = response.data
+      } catch (error) {
+        console.error('Error fetching ingredients:', error)
+      }
+    },
+    async fetchRecipes() {
+      try {
+        const response = await api.getRecipes()
+        this.recipes = response.data
+      } catch (error) {
+        console.error('Error fetching recipes:', error)
       }
     }
   },
