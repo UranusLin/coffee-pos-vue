@@ -5,27 +5,10 @@
       "code": "espresso",
       "name": "濃縮咖啡(Espresso)",
       "basePrice": 80,
-      "sizes": [
-        "小",
-        "中",
-        "大"
-      ],
-      "temperatures": [
-        "熱",
-        "冰"
-      ],
-      "sugarLevels": [
-        "無糖",
-        "微糖",
-        "半糖",
-        "正常"
-      ],
-      "iceLevels": [
-        "去冰",
-        "微冰",
-        "少冰",
-        "正常冰"
-      ],
+      "sizes": ["小", "中", "大"],
+      "temperatures": ["熱", "冰"],
+      "sugarLevels": ["無糖", "微糖", "半糖", "正常"],
+      "iceLevels": ["去冰", "微冰", "少冰", "正常冰"],
       "catrgory": "coffee",
       "quantity": 0
     },
@@ -34,27 +17,10 @@
       "code": "americano",
       "name": "美式咖啡(Americano)",
       "basePrice": 100,
-      "sizes": [
-        "小",
-        "中",
-        "大"
-      ],
-      "temperatures": [
-        "熱",
-        "冰"
-      ],
-      "sugarLevels": [
-        "無糖",
-        "微糖",
-        "半糖",
-        "正常"
-      ],
-      "iceLevels": [
-        "去冰",
-        "微冰",
-        "少冰",
-        "正常冰"
-      ],
+      "sizes": ["小", "中", "大"],
+      "temperatures": ["熱", "冰"],
+      "sugarLevels": ["無糖", "微糖", "半糖", "正常"],
+      "iceLevels": ["去冰", "微冰", "少冰", "正常冰"],
       "catrgory": "coffee",
       "quantity": 0
     },
@@ -63,27 +29,10 @@
       "code": "latte",
       "name": "拿鐵(Latte)",
       "basePrice": 120,
-      "sizes": [
-        "小",
-        "中",
-        "大"
-      ],
-      "temperatures": [
-        "熱",
-        "冰"
-      ],
-      "sugarLevels": [
-        "無糖",
-        "微糖",
-        "半糖",
-        "正常"
-      ],
-      "iceLevels": [
-        "去冰",
-        "微冰",
-        "少冰",
-        "正常冰"
-      ],
+      "sizes": ["小", "中", "大"],
+      "temperatures": ["熱", "冰"],
+      "sugarLevels": ["無糖", "微糖", "半糖", "正常"],
+      "iceLevels": ["去冰", "微冰", "少冰", "正常冰"],
       "catrgory": "coffee",
       "quantity": 0
     },
@@ -92,27 +41,10 @@
       "code": "cappuccino",
       "name": "卡布奇諾(Cappuccino)",
       "basePrice": 130,
-      "sizes": [
-        "小",
-        "中",
-        "大"
-      ],
-      "temperatures": [
-        "熱",
-        "冰"
-      ],
-      "sugarLevels": [
-        "無糖",
-        "微糖",
-        "半糖",
-        "正常"
-      ],
-      "iceLevels": [
-        "去冰",
-        "微冰",
-        "少冰",
-        "正常冰"
-      ],
+      "sizes": ["小", "中", "大"],
+      "temperatures": ["熱", "冰"],
+      "sugarLevels": ["無糖", "微糖", "半糖", "正常"],
+      "iceLevels": ["去冰", "微冰", "少冰", "正常冰"],
       "catrgory": "coffee",
       "quantity": 0
     },
@@ -121,27 +53,10 @@
       "code": "black_tea",
       "name": "紅茶(Black Tea)",
       "basePrice": 30,
-      "sizes": [
-        "小",
-        "中",
-        "大"
-      ],
-      "temperatures": [
-        "熱",
-        "冰"
-      ],
-      "sugarLevels": [
-        "無糖",
-        "微糖",
-        "半糖",
-        "正常"
-      ],
-      "iceLevels": [
-        "去冰",
-        "微冰",
-        "少冰",
-        "正常冰"
-      ],
+      "sizes": ["小", "中", "大"],
+      "temperatures": ["熱", "冰"],
+      "sugarLevels": ["無糖", "微糖", "半糖", "正常"],
+      "iceLevels": ["去冰", "微冰", "少冰", "正常冰"],
       "catrgory": "non-coffee",
       "quantity": 0
     },
@@ -151,10 +66,7 @@
       "name": "藍莓貝果(Blueberry Bagel)",
       "basePrice": 80,
       "sizes": [],
-      "temperatures": [
-        "常溫",
-        "加熱"
-      ],
+      "temperatures": ["常溫", "加熱"],
       "sugarLevels": [],
       "iceLevels": [],
       "catrgory": "food",
@@ -170,27 +82,10 @@
           "code": "espresso",
           "name": "濃縮咖啡(Espresso)",
           "basePrice": 80,
-          "sizes": [
-            "小",
-            "中",
-            "大"
-          ],
-          "temperatures": [
-            "熱",
-            "冰"
-          ],
-          "sugarLevels": [
-            "無糖",
-            "微糖",
-            "半糖",
-            "正常"
-          ],
-          "iceLevels": [
-            "去冰",
-            "微冰",
-            "少冰",
-            "正常冰"
-          ],
+          "sizes": ["小", "中", "大"],
+          "temperatures": ["熱", "冰"],
+          "sugarLevels": ["無糖", "微糖", "半糖", "正常"],
+          "iceLevels": ["去冰", "微冰", "少冰", "正常冰"],
           "catrgory": "coffee",
           "quantity": 1,
           "customization": {
@@ -206,27 +101,10 @@
           "code": "cappuccino",
           "name": "卡布奇諾(Cappuccino)",
           "basePrice": 130,
-          "sizes": [
-            "小",
-            "中",
-            "大"
-          ],
-          "temperatures": [
-            "熱",
-            "冰"
-          ],
-          "sugarLevels": [
-            "無糖",
-            "微糖",
-            "半糖",
-            "正常"
-          ],
-          "iceLevels": [
-            "去冰",
-            "微冰",
-            "少冰",
-            "正常冰"
-          ],
+          "sizes": ["小", "中", "大"],
+          "temperatures": ["熱", "冰"],
+          "sugarLevels": ["無糖", "微糖", "半糖", "正常"],
+          "iceLevels": ["去冰", "微冰", "少冰", "正常冰"],
           "catrgory": "coffee",
           "quantity": 2,
           "customization": {
@@ -252,27 +130,10 @@
           "code": "americano",
           "name": "美式咖啡(Americano)",
           "basePrice": 100,
-          "sizes": [
-            "小",
-            "中",
-            "大"
-          ],
-          "temperatures": [
-            "熱",
-            "冰"
-          ],
-          "sugarLevels": [
-            "無糖",
-            "微糖",
-            "半糖",
-            "正常"
-          ],
-          "iceLevels": [
-            "去冰",
-            "微冰",
-            "少冰",
-            "正常冰"
-          ],
+          "sizes": ["小", "中", "大"],
+          "temperatures": ["熱", "冰"],
+          "sugarLevels": ["無糖", "微糖", "半糖", "正常"],
+          "iceLevels": ["去冰", "微冰", "少冰", "正常冰"],
           "catrgory": "coffee",
           "quantity": 1,
           "customization": {
@@ -288,27 +149,10 @@
           "code": "cappuccino",
           "name": "卡布奇諾(Cappuccino)",
           "basePrice": 130,
-          "sizes": [
-            "小",
-            "中",
-            "大"
-          ],
-          "temperatures": [
-            "熱",
-            "冰"
-          ],
-          "sugarLevels": [
-            "無糖",
-            "微糖",
-            "半糖",
-            "正常"
-          ],
-          "iceLevels": [
-            "去冰",
-            "微冰",
-            "少冰",
-            "正常冰"
-          ],
+          "sizes": ["小", "中", "大"],
+          "temperatures": ["熱", "冰"],
+          "sugarLevels": ["無糖", "微糖", "半糖", "正常"],
+          "iceLevels": ["去冰", "微冰", "少冰", "正常冰"],
           "catrgory": "coffee",
           "quantity": 1,
           "customization": {
@@ -324,27 +168,10 @@
           "code": "espresso",
           "name": "濃縮咖啡(Espresso)",
           "basePrice": 80,
-          "sizes": [
-            "小",
-            "中",
-            "大"
-          ],
-          "temperatures": [
-            "熱",
-            "冰"
-          ],
-          "sugarLevels": [
-            "無糖",
-            "微糖",
-            "半糖",
-            "正常"
-          ],
-          "iceLevels": [
-            "去冰",
-            "微冰",
-            "少冰",
-            "正常冰"
-          ],
+          "sizes": ["小", "中", "大"],
+          "temperatures": ["熱", "冰"],
+          "sugarLevels": ["無糖", "微糖", "半糖", "正常"],
+          "iceLevels": ["去冰", "微冰", "少冰", "正常冰"],
           "catrgory": "coffee",
           "quantity": 1,
           "customization": {
@@ -370,27 +197,10 @@
           "code": "cappuccino",
           "name": "卡布奇諾(Cappuccino)",
           "basePrice": 130,
-          "sizes": [
-            "小",
-            "中",
-            "大"
-          ],
-          "temperatures": [
-            "熱",
-            "冰"
-          ],
-          "sugarLevels": [
-            "無糖",
-            "微糖",
-            "半糖",
-            "正常"
-          ],
-          "iceLevels": [
-            "去冰",
-            "微冰",
-            "少冰",
-            "正常冰"
-          ],
+          "sizes": ["小", "中", "大"],
+          "temperatures": ["熱", "冰"],
+          "sugarLevels": ["無糖", "微糖", "半糖", "正常"],
+          "iceLevels": ["去冰", "微冰", "少冰", "正常冰"],
           "catrgory": "coffee",
           "quantity": 1,
           "customization": {
@@ -406,27 +216,10 @@
           "code": "espresso",
           "name": "濃縮咖啡(Espresso)",
           "basePrice": 80,
-          "sizes": [
-            "小",
-            "中",
-            "大"
-          ],
-          "temperatures": [
-            "熱",
-            "冰"
-          ],
-          "sugarLevels": [
-            "無糖",
-            "微糖",
-            "半糖",
-            "正常"
-          ],
-          "iceLevels": [
-            "去冰",
-            "微冰",
-            "少冰",
-            "正常冰"
-          ],
+          "sizes": ["小", "中", "大"],
+          "temperatures": ["熱", "冰"],
+          "sugarLevels": ["無糖", "微糖", "半糖", "正常"],
+          "iceLevels": ["去冰", "微冰", "少冰", "正常冰"],
           "catrgory": "coffee",
           "quantity": 3,
           "customization": {
@@ -442,27 +235,10 @@
           "code": "black_tea",
           "name": "紅茶(Black Tea)",
           "basePrice": 30,
-          "sizes": [
-            "小",
-            "中",
-            "大"
-          ],
-          "temperatures": [
-            "熱",
-            "冰"
-          ],
-          "sugarLevels": [
-            "無糖",
-            "微糖",
-            "半糖",
-            "正常"
-          ],
-          "iceLevels": [
-            "去冰",
-            "微冰",
-            "少冰",
-            "正常冰"
-          ],
+          "sizes": ["小", "中", "大"],
+          "temperatures": ["熱", "冰"],
+          "sugarLevels": ["無糖", "微糖", "半糖", "正常"],
+          "iceLevels": ["去冰", "微冰", "少冰", "正常冰"],
           "catrgory": "non-coffee",
           "quantity": 6,
           "customization": {
@@ -480,5 +256,28 @@
       "change": 0,
       "date": "2024-08-26T13:39:29.071Z"
     }
-  ]
+  ],
+  "ingredients": {
+    "milk": { "name": "Milk", "unit": "ml", "amount": 10000 },
+    "coffee": { "name": "Coffee", "unit": "g", "amount": 1000 },
+    "sugar": { "name": "Sugar", "unit": "g", "amount": 3000 }
+  },
+  "recipes": {
+    "espresso": {
+      "name": "Espresso",
+      "ingredients": { "coffee": 40 }
+    },
+    "americano": {
+      "name": "Americano",
+      "ingredients": { "coffee": 40 }
+    },
+    "latte": {
+      "name": "Latte",
+      "ingredients": { "milk": 200, "coffee": 40 }
+    },
+    "cappuccino": {
+      "name": "Cappuccino",
+      "ingredients": { "milk": 150, "coffee": 40 }
+    }
+  }
 }

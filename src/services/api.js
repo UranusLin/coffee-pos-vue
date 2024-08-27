@@ -17,5 +17,14 @@ export default {
   },
   getTransactions() {
     return apiClient.get('/transactions')
+  },
+  getIngredients() {
+    return apiClient.get('/ingredients')
+  },
+  updateIngredient(ingredient, data) {
+    return apiClient.patch(`/ingredients/${ingredient}`, data)
+  },
+  getRecipes() {
+    return apiClient.get('/recipes')
   }
 }

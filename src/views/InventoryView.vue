@@ -1,10 +1,12 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useInventoryStore } from '../stores/inventory'
 
 const inventoryStore = useInventoryStore()
 
-const ingredients = computed(() => inventoryStore.getAllIngredients)
+onMounted(() => {
+  inventoryStore.fetchIngredients()
+})
 
 const restockForm = ref({
   ingredient: '',
@@ -31,7 +33,7 @@ function restock() {
         <h2 class="text-2xl font-semibold mb-4">Current Stock</h2>
         <ul class="space-y-2">
           <li
-            v-for="ingredient in ingredients"
+            v-for="ingredient in inventoryStore.ingredients"
             :key="ingredient.name"
             class="flex justify-between items-center"
           >
@@ -52,7 +54,7 @@ function restock() {
               class="w-full p-2 border rounded"
             >
               <option
-                v-for="ingredient in ingredients"
+                v-for="ingredient in inventoryStore.ingredients"
                 :key="ingredient.name"
                 :value="ingredient.name"
               >

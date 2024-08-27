@@ -3,34 +3,20 @@ import api from '@/services/api'
 
 export const useInventoryStore = defineStore('inventory', {
   state: () => ({
-    ingredients: {
-      milk: { name: 'Milk', unit: 'ml', amount: 10000 },
-      coffee: { name: 'Coffee', unit: 'g', amount: 1000 },
-      sugar: { name: 'Sugar', unit: 'g', amount: 3000 }
-    },
-    recipes: {
-      espresso: {
-        name: 'Espresso',
-        ingredients: { coffee: 40 }
-      },
-      americano: {
-        name: 'Americano',
-        ingredients: { coffee: 40 }
-      },
-      latte: {
-        name: 'Latte',
-        ingredients: { milk: 200, coffee: 40 }
-      },
-      cappuccino: {
-        name: 'Cappuccino',
-        ingredients: { milk: 150, coffee: 40 }
-      }
-    },
+    ingredients: {},
+    recipes: {},
     menuItems: []
   }),
   actions: {
-    updateStock(ingredient, amount) {
-      this.ingredients[ingredient.toLowerCase()].amount += amount
+    async updateStock(ingredient, amount) {
+      try {
+        ingredient = ingredient.toLowerCase()
+        const currenAmount = this.ingredients[ingredient].amount
+        const response = await api.updateIngredient(ingredient, { amount: currenAmount + amount })
+        this.ingredients[ingredient] = response.data
+      } catch (error) {
+        console.error('Error updating stock:', error)
+      }
     },
     consumeIngredients(recipe) {
       if (!this.recipes[recipe]) {
@@ -94,6 +80,22 @@ export const useInventoryStore = defineStore('inventory', {
         this.menuItems = response.data
       } catch (error) {
         console.error('Error fetching menu:', error)
+      }
+    },
+    async fetchIngredients() {
+      try {
+        const response = await api.getIngredients()
+        this.ingredients = response.data
+      } catch (error) {
+        console.error('Error fetching ingredients:', error)
+      }
+    },
+    async fetchRecipes() {
+      try {
+        const response = await api.getRecipes()
+        this.recipes = response.data
+      } catch (error) {
+        console.error('Error fetching recipes:', error)
       }
     }
   },
