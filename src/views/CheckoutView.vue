@@ -19,6 +19,7 @@ const currentCategory = ref('coffee')
 
 onMounted(() => {
   inventoryStore.fetchMenu()
+  inventoryStore.fetchRecipes()
 })
 
 const currentOrder = ref([])

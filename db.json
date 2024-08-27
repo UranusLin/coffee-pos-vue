@@ -479,6 +479,456 @@
       "amountPaid": 750,
       "change": 0,
       "date": "2024-08-26T13:39:29.071Z"
+    },
+    {
+      "id": 1724763141251,
+      "items": [
+        {
+          "id": 4,
+          "code": "cappuccino",
+          "name": "卡布奇諾(Cappuccino)",
+          "basePrice": 130,
+          "sizes": [
+            "小",
+            "中",
+            "大"
+          ],
+          "temperatures": [
+            "熱",
+            "冰"
+          ],
+          "sugarLevels": [
+            "無糖",
+            "微糖",
+            "半糖",
+            "正常"
+          ],
+          "iceLevels": [
+            "去冰",
+            "微冰",
+            "少冰",
+            "正常冰"
+          ],
+          "catrgory": "coffee",
+          "quantity": 6,
+          "customization": {
+            "size": "大",
+            "temperature": "冰",
+            "sugarLevel": "無糖",
+            "iceLevel": "微冰"
+          },
+          "price": 170
+        }
+      ],
+      "total": 1020,
+      "paymentMethod": "youyou",
+      "amountPaid": 1020,
+      "change": 0,
+      "date": "2024-08-27T12:52:21.251Z"
+    },
+    {
+      "id": 1724763301362,
+      "items": [
+        {
+          "id": 2,
+          "code": "americano",
+          "name": "美式咖啡(Americano)",
+          "basePrice": 100,
+          "sizes": [
+            "小",
+            "中",
+            "大"
+          ],
+          "temperatures": [
+            "熱",
+            "冰"
+          ],
+          "sugarLevels": [
+            "無糖",
+            "微糖",
+            "半糖",
+            "正常"
+          ],
+          "iceLevels": [
+            "去冰",
+            "微冰",
+            "少冰",
+            "正常冰"
+          ],
+          "catrgory": "coffee",
+          "quantity": 1,
+          "customization": {
+            "size": "中",
+            "temperature": "冰",
+            "sugarLevel": "無糖",
+            "iceLevel": "微冰"
+          },
+          "price": 120
+        },
+        {
+          "id": 4,
+          "code": "cappuccino",
+          "name": "卡布奇諾(Cappuccino)",
+          "basePrice": 130,
+          "sizes": [
+            "小",
+            "中",
+            "大"
+          ],
+          "temperatures": [
+            "熱",
+            "冰"
+          ],
+          "sugarLevels": [
+            "無糖",
+            "微糖",
+            "半糖",
+            "正常"
+          ],
+          "iceLevels": [
+            "去冰",
+            "微冰",
+            "少冰",
+            "正常冰"
+          ],
+          "catrgory": "coffee",
+          "quantity": 1,
+          "customization": {
+            "size": "中",
+            "temperature": "冰",
+            "sugarLevel": "無糖",
+            "iceLevel": "微冰"
+          },
+          "price": 150
+        }
+      ],
+      "total": 270,
+      "paymentMethod": "taiwanpay",
+      "amountPaid": 270,
+      "change": 0,
+      "date": "2024-08-27T12:55:01.362Z"
+    },
+    {
+      "id": 1724763435086,
+      "items": [
+        {
+          "id": 4,
+          "code": "cappuccino",
+          "name": "卡布奇諾(Cappuccino)",
+          "basePrice": 130,
+          "sizes": [
+            "小",
+            "中",
+            "大"
+          ],
+          "temperatures": [
+            "熱",
+            "冰"
+          ],
+          "sugarLevels": [
+            "無糖",
+            "微糖",
+            "半糖",
+            "正常"
+          ],
+          "iceLevels": [
+            "去冰",
+            "微冰",
+            "少冰",
+            "正常冰"
+          ],
+          "catrgory": "coffee",
+          "quantity": 1,
+          "customization": {
+            "size": "大",
+            "temperature": "冰",
+            "sugarLevel": "正常",
+            "iceLevel": "微冰"
+          },
+          "price": 170
+        }
+      ],
+      "total": 170,
+      "paymentMethod": "youyou",
+      "amountPaid": 170,
+      "change": 0,
+      "date": "2024-08-27T12:57:15.086Z"
+    },
+    {
+      "id": 1724763449507,
+      "items": [
+        {
+          "id": 4,
+          "code": "cappuccino",
+          "name": "卡布奇諾(Cappuccino)",
+          "basePrice": 130,
+          "sizes": [
+            "小",
+            "中",
+            "大"
+          ],
+          "temperatures": [
+            "熱",
+            "冰"
+          ],
+          "sugarLevels": [
+            "無糖",
+            "微糖",
+            "半糖",
+            "正常"
+          ],
+          "iceLevels": [
+            "去冰",
+            "微冰",
+            "少冰",
+            "正常冰"
+          ],
+          "catrgory": "coffee",
+          "quantity": 10,
+          "customization": {
+            "size": "大",
+            "temperature": "冰",
+            "sugarLevel": "正常",
+            "iceLevel": "微冰"
+          },
+          "price": 170
+        }
+      ],
+      "total": 1700,
+      "paymentMethod": "linepay",
+      "amountPaid": 1700,
+      "change": 0,
+      "date": "2024-08-27T12:57:29.507Z"
+    },
+    {
+      "id": 1724763519835,
+      "items": [
+        {
+          "id": 1,
+          "code": "espresso",
+          "name": "濃縮咖啡(Espresso)",
+          "basePrice": 80,
+          "sizes": [
+            "小",
+            "中",
+            "大"
+          ],
+          "temperatures": [
+            "熱",
+            "冰"
+          ],
+          "sugarLevels": [
+            "無糖",
+            "微糖",
+            "半糖",
+            "正常"
+          ],
+          "iceLevels": [
+            "去冰",
+            "微冰",
+            "少冰",
+            "正常冰"
+          ],
+          "catrgory": "coffee",
+          "quantity": 10,
+          "customization": {
+            "size": "大",
+            "temperature": "冰",
+            "sugarLevel": "無糖",
+            "iceLevel": "微冰"
+          },
+          "price": 120
+        }
+      ],
+      "total": 1200,
+      "paymentMethod": "youyou",
+      "amountPaid": 1200,
+      "change": 0,
+      "date": "2024-08-27T12:58:39.835Z"
+    },
+    {
+      "id": 1724763532238,
+      "items": [
+        {
+          "id": 1,
+          "code": "espresso",
+          "name": "濃縮咖啡(Espresso)",
+          "basePrice": 80,
+          "sizes": [
+            "小",
+            "中",
+            "大"
+          ],
+          "temperatures": [
+            "熱",
+            "冰"
+          ],
+          "sugarLevels": [
+            "無糖",
+            "微糖",
+            "半糖",
+            "正常"
+          ],
+          "iceLevels": [
+            "去冰",
+            "微冰",
+            "少冰",
+            "正常冰"
+          ],
+          "catrgory": "coffee",
+          "quantity": 7,
+          "customization": {
+            "size": "大",
+            "temperature": "冰",
+            "sugarLevel": "無糖",
+            "iceLevel": "微冰"
+          },
+          "price": 120
+        }
+      ],
+      "total": 840,
+      "paymentMethod": "linepay",
+      "amountPaid": 840,
+      "change": 0,
+      "date": "2024-08-27T12:58:52.238Z"
+    },
+    {
+      "id": 1724763555490,
+      "items": [
+        {
+          "id": 2,
+          "code": "americano",
+          "name": "美式咖啡(Americano)",
+          "basePrice": 100,
+          "sizes": [
+            "小",
+            "中",
+            "大"
+          ],
+          "temperatures": [
+            "熱",
+            "冰"
+          ],
+          "sugarLevels": [
+            "無糖",
+            "微糖",
+            "半糖",
+            "正常"
+          ],
+          "iceLevels": [
+            "去冰",
+            "微冰",
+            "少冰",
+            "正常冰"
+          ],
+          "catrgory": "coffee",
+          "quantity": 9,
+          "customization": {
+            "size": "大",
+            "temperature": "冰",
+            "sugarLevel": "無糖",
+            "iceLevel": "微冰"
+          },
+          "price": 140
+        }
+      ],
+      "total": 1260,
+      "paymentMethod": "taiwanpay",
+      "amountPaid": 1260,
+      "change": 0,
+      "date": "2024-08-27T12:59:15.490Z"
+    },
+    {
+      "id": 1724763578631,
+      "items": [
+        {
+          "id": 3,
+          "code": "latte",
+          "name": "拿鐵(Latte)",
+          "basePrice": 120,
+          "sizes": [
+            "小",
+            "中",
+            "大"
+          ],
+          "temperatures": [
+            "熱",
+            "冰"
+          ],
+          "sugarLevels": [
+            "無糖",
+            "微糖",
+            "半糖",
+            "正常"
+          ],
+          "iceLevels": [
+            "去冰",
+            "微冰",
+            "少冰",
+            "正常冰"
+          ],
+          "catrgory": "coffee",
+          "quantity": 1,
+          "customization": {
+            "size": "大",
+            "temperature": "冰",
+            "sugarLevel": "無糖",
+            "iceLevel": "微冰"
+          },
+          "price": 160
+        }
+      ],
+      "total": 160,
+      "paymentMethod": "youyou",
+      "amountPaid": 160,
+      "change": 0,
+      "date": "2024-08-27T12:59:38.631Z"
+    },
+    {
+      "id": 1724763589280,
+      "items": [
+        {
+          "id": 4,
+          "code": "cappuccino",
+          "name": "卡布奇諾(Cappuccino)",
+          "basePrice": 130,
+          "sizes": [
+            "小",
+            "中",
+            "大"
+          ],
+          "temperatures": [
+            "熱",
+            "冰"
+          ],
+          "sugarLevels": [
+            "無糖",
+            "微糖",
+            "半糖",
+            "正常"
+          ],
+          "iceLevels": [
+            "去冰",
+            "微冰",
+            "少冰",
+            "正常冰"
+          ],
+          "catrgory": "coffee",
+          "quantity": 8,
+          "customization": {
+            "size": "中",
+            "temperature": "冰",
+            "sugarLevel": "無糖",
+            "iceLevel": "微冰"
+          },
+          "price": 150
+        }
+      ],
+      "total": 1200,
+      "paymentMethod": "taiwanpay",
+      "amountPaid": 1200,
+      "change": 0,
+      "date": "2024-08-27T12:59:49.280Z"
     }
   ],
   "ingredients": [
@@ -486,13 +936,13 @@
       "id": "milk",
       "name": "Milk",
       "unit": "ml",
-      "amount": 10300
+      "amount": 9650
     },
     {
       "id": "coffee",
       "name": "Coffee",
       "unit": "g",
-      "amount": 1200
+      "amount": 920
     },
     {
       "id": "sugar",
@@ -501,32 +951,36 @@
       "amount": 4000
     }
   ],
-  "recipes": {
-    "espresso": {
+  "recipes": [
+    {
+      "id": "espresso",
       "name": "Espresso",
       "ingredients": {
         "coffee": 40
       }
     },
-    "americano": {
+    {
+      "id": "americano",
       "name": "Americano",
       "ingredients": {
         "coffee": 40
       }
     },
-    "latte": {
+    {
+      "id": "latte",
       "name": "Latte",
       "ingredients": {
         "milk": 200,
         "coffee": 40
       }
     },
-    "cappuccino": {
+    {
+      "id": "cappuccino",
       "name": "Cappuccino",
       "ingredients": {
         "milk": 150,
         "coffee": 40
       }
     }
-  }
+  ]
 }

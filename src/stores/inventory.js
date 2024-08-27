@@ -3,8 +3,8 @@ import api from '@/services/api'
 
 export const useInventoryStore = defineStore('inventory', {
   state: () => ({
-    ingredients: {},
-    recipes: {},
+    ingredients: [],
+    recipes: [],
     menuItems: []
   }),
   actions: {
@@ -22,24 +22,29 @@ export const useInventoryStore = defineStore('inventory', {
         console.error('Error updating stock:', error)
       }
     },
-    consumeIngredients(recipe) {
-      if (!this.recipes[recipe]) {
+    async consumeIngredients(recipeId) {
+      const recipe = this.recipes.find((r) => r.id === recipeId)
+      if (!recipe) {
         console.warn(`Recipe not found: ${recipe}`)
         return
       }
-      for (const [ingredient, amount] of Object.entries(this.recipes[recipe].ingredients)) {
-        if (this.ingredients[ingredient]) {
-          this.ingredients[ingredient].amount -= amount
+      for (const [ingredient, amount] of Object.entries(recipe.ingredients)) {
+        const ingredientObj = this.ingredients.find((i) => i.id === ingredient)
+        if (ingredientObj) {
+          ingredientObj.amount -= amount
+          await api.updateIngredient(ingredientObj.id, { amount: ingredientObj.amount })
         }
       }
     },
-    checkStock(recipe) {
-      if (!this.recipes[recipe]) {
+    checkStock(recipeId) {
+      const recipe = this.recipes.find((r) => r.id === recipeId)
+      if (!recipe) {
         console.warn(`Recipe not found: ${recipe}`)
         return true
       }
-      for (const [ingredient, amount] of Object.entries(this.recipes[recipe].ingredients)) {
-        if (!this.ingredients[ingredient] || this.ingredients[ingredient].amount < amount) {
+      for (const [ingredient, amount] of Object.entries(recipe.ingredients)) {
+        const ingredientObj = this.ingredients.find((i) => i.id === ingredient)
+        if (!ingredientObj || ingredientObj.amount < amount) {
           return false
         }
       }
@@ -53,7 +58,7 @@ export const useInventoryStore = defineStore('inventory', {
 
       // 計算訂單所需的總原料量
       for (const item of orderItems) {
-        const recipe = this.recipes[item.code]
+        const recipe = this.recipes.find((r) => r.id === item.code)
         if (!recipe) {
           console.warn(`Recipe not found: ${item.code}`)
           continue
@@ -65,7 +70,8 @@ export const useInventoryStore = defineStore('inventory', {
 
       // 檢查是否有足夠的庫存
       for (const [ingredient, amount] of Object.entries(totalNeeded)) {
-        if (!this.ingredients[ingredient] || this.ingredients[ingredient].amount < amount) {
+        const ingredientObj = this.ingredients.find((i) => i.id === ingredient)
+        if (!ingredientObj || ingredientObj.amount < amount) {
           return { success: false, ingredient: ingredient }
         }
       }

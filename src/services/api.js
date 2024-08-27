@@ -29,5 +29,8 @@ export default {
   },
   getRecipes() {
     return apiClient.get('/recipes')
+  },
+  addOrUpdateRecipe(id, recipe) {
+    return apiClient.put(`/recipes/${id}`, recipe)
   }
 }

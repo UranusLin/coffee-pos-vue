@@ -6,6 +6,7 @@ const inventoryStore = useInventoryStore()
 
 onMounted(() => {
   inventoryStore.fetchIngredients()
+  inventoryStore.fetchRecipes()
 })
 
 const restockForm = ref({
